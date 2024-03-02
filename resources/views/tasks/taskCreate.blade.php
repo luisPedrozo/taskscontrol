@@ -30,6 +30,12 @@
         <option value="Pendiente">Pendiente</option>
     </select>
     </div>
+    <div class="mb-5 text-center">
+        <label for="user_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">User</label>
+        <select name="user_id" class="form-select" id="user_id">
+          <option value="{{auth()->id()}}">{{auth()->user()->name}}</option>
+        </select>
+    </div>
     <div class="mb-5">
         <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="grid-city">
             Start Time

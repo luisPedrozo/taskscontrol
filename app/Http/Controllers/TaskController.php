@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -14,8 +15,9 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::latest()->paginate(5);
-        return view('tasks.index', ['tasks'=>$tasks]);
+        $user = User::with('tasks')->findOrFail(auth()->user()->id);
+        $tasks = Task::all();
+        return view('tasks.index', ['tasks'=>$tasks, 'user'=>$user]);
    
     }
 
@@ -41,7 +43,9 @@ class TaskController extends Controller
      */
     public function create()
     {
-        return view('tasks.taskCreate');
+
+        $users = User::all();
+        return view('tasks.taskCreate', ['users'=>$users]);
 
     }
 

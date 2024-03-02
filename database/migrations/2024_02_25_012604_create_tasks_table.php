@@ -18,6 +18,8 @@ return new class extends Migration
             $table->datetime('start_time')->nullable();
             $table->datetime('finish_time')->nullable();
             $table->enum('status',['Completa', 'En Progreso', 'Pendiente']);
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
             $table->timestamps();
         });
     }
